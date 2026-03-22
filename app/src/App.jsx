@@ -1,10 +1,12 @@
 import { useState } from 'react'
 import { lessen } from './data/provinces'
+import { useMobiel } from './hooks/useMobiel'
 import LesPage from './components/LesPage'
 import KalibratieTool from './components/KalibratieTool'
 
 function LesKaart({ les, onClick }) {
   const [hover, setHover] = useState(false)
+  const mobiel = useMobiel()
   const steden = les.plaatsen.filter(p => p.type === 'stad')
 
   return (
@@ -21,7 +23,7 @@ function LesKaart({ les, onClick }) {
         transition: 'all 0.2s ease',
       }}
     >
-      <div style={{ position: 'relative', height: 160, overflow: 'hidden', background: '#f5f5f5' }}>
+      <div style={{ position: 'relative', height: mobiel ? 100 : 160, overflow: 'hidden', background: '#f5f5f5' }}>
         <img
           src={les.afbeeldingNamen}
           alt={les.titel}
@@ -42,34 +44,31 @@ function LesKaart({ les, onClick }) {
           {les.id}
         </div>
       </div>
-      <div style={{ padding: '12px 14px' }}>
-        <div style={{ fontWeight: 800, fontSize: 16, color: '#1a237e', marginBottom: 4 }}>
+      <div style={{ padding: mobiel ? '8px 10px' : '12px 14px' }}>
+        <div style={{ fontWeight: 800, fontSize: mobiel ? 13 : 16, color: '#1a237e', marginBottom: 2 }}>
           {les.titel}
         </div>
-        <div style={{ fontSize: 12, color: '#666' }}>
-          {steden.length} steden te leren
+        <div style={{ fontSize: 11, color: '#666' }}>
+          {steden.length} plaatsen
         </div>
-        <div style={{ marginTop: 10, display: 'flex', gap: 6 }}>
-          <span style={{
-            background: '#E8EAF6', color: '#3949AB',
-            borderRadius: 6, padding: '4px 8px', fontSize: 11, fontWeight: 600
-          }}>📖 Bestuderen</span>
-          <span style={{
-            background: '#E8F5E9', color: '#2E7D32',
-            borderRadius: 6, padding: '4px 8px', fontSize: 11, fontWeight: 600
-          }}>✏️ Oefenen</span>
-        </div>
+        {!mobiel && (
+          <div style={{ marginTop: 10, display: 'flex', gap: 6 }}>
+            <span style={{ background: '#E8EAF6', color: '#3949AB', borderRadius: 6, padding: '4px 8px', fontSize: 11, fontWeight: 600 }}>📖 Bestuderen</span>
+            <span style={{ background: '#E8F5E9', color: '#2E7D32', borderRadius: 6, padding: '4px 8px', fontSize: 11, fontWeight: 600 }}>✏️ Oefenen</span>
+          </div>
+        )}
       </div>
     </div>
   )
 }
 
 function HomeScherm({ onLesKlik, onKalibratie }) {
+  const mobiel = useMobiel()
   return (
     <div style={{ minHeight: '100vh', background: '#f0f2ff', fontFamily: 'Arial, sans-serif' }}>
       <div style={{
         background: 'linear-gradient(135deg, #1a237e 0%, #283593 100%)',
-        color: 'white', padding: '28px 24px', textAlign: 'center',
+        color: 'white', padding: mobiel ? '20px 16px' : '28px 24px', textAlign: 'center',
         boxShadow: '0 4px 12px rgba(26,35,126,0.3)'
       }}>
         <div style={{
@@ -96,14 +95,14 @@ function HomeScherm({ onLesKlik, onKalibratie }) {
           🎯 Coördinaten instellen
         </button>
       </div>
-      <div style={{ padding: '24px 20px', maxWidth: 900, margin: '0 auto' }}>
+      <div style={{ padding: mobiel ? '16px 10px' : '24px 20px', maxWidth: 900, margin: '0 auto' }}>
         <div style={{ fontSize: 16, fontWeight: 700, color: '#1a237e', marginBottom: 16 }}>
           Kies een les om te beginnen:
         </div>
         <div style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fill, minmax(240px, 1fr))',
-          gap: 16
+          gridTemplateColumns: mobiel ? '1fr 1fr' : 'repeat(auto-fill, minmax(240px, 1fr))',
+          gap: mobiel ? 10 : 16
         }}>
           {lessen.map(les => (
             <LesKaart key={les.id} les={les} onClick={() => onLesKlik(les)} />

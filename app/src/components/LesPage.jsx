@@ -4,11 +4,13 @@ import QuizPanel from './QuizPanel'
 import VoortgangBalk from './VoortgangBalk'
 import WeetjesPanel from './WeetjesPanel'
 import BewerkenTab from './BewerkenTab'
+import { useMobiel } from '../hooks/useMobiel'
 
 export default function LesPage({ les, onTerug }) {
   const [modus, setModus] = useState('studeren') // 'studeren' | 'oefenen' | 'weetjes'
   const [aangeklikte, setAangeklikte] = useState(null)
   const [goedBeantwoord, setGoedBeantwoord] = useState(new Set())
+  const mobiel = useMobiel()
 
   const steden = les.plaatsen.filter(p => p.type === 'stad')
 
@@ -21,12 +23,9 @@ export default function LesPage({ les, onTerug }) {
     setAangeklikte(null)
   }
 
-  const TABS = [
-    ['studeren',  '📖 Bestuderen'],
-    ['oefenen',   '✏️ Oefenen'],
-    ['weetjes',   '💡 Weetjes'],
-    ['bewerken',  '🔧 Bewerken'],
-  ]
+  const TABS = mobiel
+    ? [['studeren','📖'],['oefenen','✏️'],['weetjes','💡'],['bewerken','🔧']]
+    : [['studeren','📖 Bestuderen'],['oefenen','✏️ Oefenen'],['weetjes','💡 Weetjes'],['bewerken','🔧 Bewerken']]
 
   return (
     <div style={{ minHeight: '100vh', background: '#f0f2ff', fontFamily: 'Arial, sans-serif' }}>
@@ -34,7 +33,9 @@ export default function LesPage({ les, onTerug }) {
       {/* Top navigatie */}
       <div style={{
         background: '#1a237e', color: 'white',
-        padding: '12px 20px', display: 'flex', alignItems: 'center', gap: 12
+        padding: mobiel ? '10px 12px' : '12px 20px',
+        display: 'flex', alignItems: 'center', gap: mobiel ? 8 : 12,
+        flexWrap: mobiel ? 'wrap' : 'nowrap',
       }}>
         <button onClick={onTerug} style={{
           background: 'rgba(255,255,255,0.2)', border: 'none', color: 'white',
@@ -48,16 +49,21 @@ export default function LesPage({ les, onTerug }) {
 
         {/* Tabbladen */}
         <div style={{
-          marginLeft: 'auto', display: 'flex', gap: 4,
-          background: 'rgba(255,255,255,0.15)', borderRadius: 10, padding: 4
+          marginLeft: mobiel ? 0 : 'auto',
+          width: mobiel ? '100%' : 'auto',
+          display: 'flex', gap: 4,
+          background: 'rgba(255,255,255,0.15)', borderRadius: 10, padding: 4,
+          overflowX: 'auto',
         }}>
           {TABS.map(([m, label]) => (
             <button key={m} onClick={() => { setModus(m); setAangeklikte(null) }}
               style={{
-                padding: '7px 16px', borderRadius: 7, border: 'none', cursor: 'pointer',
+                padding: mobiel ? '8px 14px' : '7px 16px',
+                borderRadius: 7, border: 'none', cursor: 'pointer',
                 background: modus === m ? 'white' : 'transparent',
                 color: modus === m ? '#1a237e' : 'white',
-                fontWeight: 700, fontSize: 14, transition: 'all 0.2s'
+                fontWeight: 700, fontSize: mobiel ? 18 : 14,
+                transition: 'all 0.2s', flexShrink: 0,
               }}>
               {label}
             </button>
@@ -66,7 +72,7 @@ export default function LesPage({ les, onTerug }) {
       </div>
 
       {/* Content */}
-      <div style={{ padding: 20, maxWidth: 1400, margin: '0 auto' }}>
+      <div style={{ padding: mobiel ? 10 : 20, maxWidth: 1400, margin: '0 auto' }}>
 
         {/* ── Weetjes ── */}
         {modus === 'weetjes' && (
@@ -89,8 +95,8 @@ export default function LesPage({ les, onTerug }) {
 
             <div style={{
               display: 'grid',
-              gridTemplateColumns: modus === 'oefenen' ? '1fr 360px' : '1fr',
-              gap: 20,
+              gridTemplateColumns: (modus === 'oefenen' && !mobiel) ? '1fr 360px' : '1fr',
+              gap: mobiel ? 10 : 20,
               alignItems: 'start'
             }}>
 
@@ -117,7 +123,7 @@ export default function LesPage({ les, onTerug }) {
 
               {/* Quiz panel */}
               {modus === 'oefenen' && (
-                <div style={{ position: 'sticky', top: 20 }}>
+                <div style={{ position: mobiel ? 'static' : 'sticky', top: 20 }}>
                   <QuizPanel
                     les={les}
                     aangeklikte={aangeklikte}

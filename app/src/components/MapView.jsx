@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useMobiel } from '../hooks/useMobiel'
 
 const typeKleur = {
   stad:   '#d32f2f',
@@ -9,6 +10,7 @@ const typeKleur = {
 
 export default function MapView({ les, modus, onPlaatsKlik, actiefPlaats }) {
   const [hover, setHover] = useState(null)
+  const mobiel = useMobiel()
 
   const afbeelding = modus === 'studeren'
     ? les.afbeeldingNamen
@@ -54,9 +56,10 @@ export default function MapView({ les, modus, onPlaatsKlik, actiefPlaats }) {
 
           // Studiemodus: kleine gekleurde stip + tooltip
           // Quizmodus:   grotere klikbare stip
+          const basisGrootte = mobiel ? 14 : 8
           const dotSize = isQuiz
-            ? (isHover ? 16 : 12)
-            : (isHover ? 12 : 8)
+            ? (isHover ? (mobiel ? 22 : 16) : (mobiel ? 18 : 12))
+            : (isHover ? (mobiel ? 16 : 12) : basisGrootte)
 
           const dotKleur = isActief
             ? '#FFD600'
@@ -69,9 +72,12 @@ export default function MapView({ les, modus, onPlaatsKlik, actiefPlaats }) {
           return (
             <div
               key={i}
-              onClick={() => isQuiz && onPlaatsKlik && onPlaatsKlik(plaats)}
-              onMouseEnter={() => setHover(i)}
-              onMouseLeave={() => setHover(null)}
+              onClick={() => {
+                if (isQuiz) { onPlaatsKlik && onPlaatsKlik(plaats) }
+                else { setHover(hover === i ? null : i) } // touch: toggle tooltip
+              }}
+              onMouseEnter={() => !mobiel && setHover(i)}
+              onMouseLeave={() => !mobiel && setHover(null)}
               style={{
                 position: 'absolute',
                 left: `${plaats.x}%`,
@@ -137,7 +143,7 @@ export default function MapView({ les, modus, onPlaatsKlik, actiefPlaats }) {
           borderTop: '1px solid #ddd', flexWrap: 'wrap',
           fontSize: 11, fontFamily: 'Arial, sans-serif'
         }}>
-          <span style={{ color: '#555', fontSize: 11 }}>Beweeg over een stip voor de naam</span>
+          <span style={{ color: '#555', fontSize: 11 }}>{mobiel ? 'Tik op een stip voor de naam' : 'Beweeg over een stip voor de naam'}</span>
           {Object.entries(typeKleur).filter(([t]) => les.plaatsen.some(p => p.type === t)).map(([type, kleur]) => (
             <span key={type} style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
               <span style={{
