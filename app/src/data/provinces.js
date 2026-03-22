@@ -3,8 +3,8 @@ export const lessen = [
   {
     id: 1,
     titel: "Overijssel",
-    afbeeldingNamen: "/maps/les1_overijssel_namen.png",
-    afbeeldingBlanco: "/maps/les1_overijssel_blanco.png",
+    afbeeldingNamen: "maps/les1_overijssel_namen.png",
+    afbeeldingBlanco: "maps/les1_overijssel_blanco.png",
     kleur: "#4CAF50",
     plaatsen: [
       { naam: "Steenwijk", x: 38.0, y: 19.7, type: "stad" },
@@ -36,8 +36,8 @@ export const lessen = [
   {
     id: 2,
     titel: "Zeeland",
-    afbeeldingNamen: "/maps/les2_zeeland_namen.png",
-    afbeeldingBlanco: "/maps/les2_zeeland_blanco.png",
+    afbeeldingNamen: "maps/les2_zeeland_namen.png",
+    afbeeldingBlanco: "maps/les2_zeeland_blanco.png",
     kleur: "#2196F3",
     plaatsen: [
       { naam: "Zierikzee", x: 58.1, y: 33.4, type: "stad" },
@@ -67,8 +67,8 @@ export const lessen = [
   {
     id: 3,
     titel: "Groningen en Drenthe",
-    afbeeldingNamen: "/maps/les3_groningen_drenthe_namen.png",
-    afbeeldingBlanco: "/maps/les3_groningen_drenthe_blanco.png",
+    afbeeldingNamen: "maps/les3_groningen_drenthe_namen.png",
+    afbeeldingBlanco: "maps/les3_groningen_drenthe_blanco.png",
     kleur: "#FF9800",
     plaatsen: [
       { naam: "Roodeschool", x: 62.7, y: 28.0, type: "stad" },
@@ -110,8 +110,8 @@ export const lessen = [
   {
     id: 4,
     titel: "Flevoland en Utrecht",
-    afbeeldingNamen: "/maps/les4_flevoland_utrecht_namen.png",
-    afbeeldingBlanco: "/maps/les4_flevoland_utrecht_blanco.png",
+    afbeeldingNamen: "maps/les4_flevoland_utrecht_namen.png",
+    afbeeldingBlanco: "maps/les4_flevoland_utrecht_blanco.png",
     kleur: "#9C27B0",
     plaatsen: [
       { naam: "Urk", x: 69.8, y: 27.7, type: "stad" },
@@ -148,8 +148,8 @@ export const lessen = [
   {
     id: 5,
     titel: "Noord-Brabant en Limburg",
-    afbeeldingNamen: "/maps/les5_brabant_limburg_namen.png",
-    afbeeldingBlanco: "/maps/les5_brabant_limburg_blanco.png",
+    afbeeldingNamen: "maps/les5_brabant_limburg_namen.png",
+    afbeeldingBlanco: "maps/les5_brabant_limburg_blanco.png",
     kleur: "#F44336",
     plaatsen: [
       { naam: "Bergen op Zoom", x: 25.3, y: 39.0, type: "stad" },
@@ -196,8 +196,8 @@ export const lessen = [
   {
     id: 6,
     titel: "Zuid-Holland",
-    afbeeldingNamen: "/maps/les6_zuidholland_namen.png",
-    afbeeldingBlanco: "/maps/les6_zuidholland_blanco.png",
+    afbeeldingNamen: "maps/les6_zuidholland_namen.png",
+    afbeeldingBlanco: "maps/les6_zuidholland_blanco.png",
     kleur: "#00BCD4",
     plaatsen: [
       { naam: "Noordwijk", x: 49.3, y: 23.4, type: "stad" },
@@ -234,8 +234,8 @@ export const lessen = [
   {
     id: 7,
     titel: "Noord-Holland",
-    afbeeldingNamen: "/maps/les7_noordholland_namen.png",
-    afbeeldingBlanco: "/maps/les7_noordholland_blanco.png",
+    afbeeldingNamen: "maps/les7_noordholland_namen.png",
+    afbeeldingBlanco: "maps/les7_noordholland_blanco.png",
     kleur: "#FF5722",
     plaatsen: [
       { naam: "Texel", x: 40.6, y: 19.7, type: "stad" },
@@ -274,8 +274,8 @@ export const lessen = [
   {
     id: 8,
     titel: "Fryslân",
-    afbeeldingNamen: "/maps/les8_fryslan_namen.png",
-    afbeeldingBlanco: "/maps/les8_fryslan_blanco.png",
+    afbeeldingNamen: "maps/les8_fryslan_namen.png",
+    afbeeldingBlanco: "maps/les8_fryslan_blanco.png",
     kleur: "#009688",
     plaatsen: [
       { naam: "Dokkum", x: 65.4, y: 31.1, type: "stad" },
@@ -310,8 +310,8 @@ export const lessen = [
   {
     id: 9,
     titel: "Gelderland",
-    afbeeldingNamen: "/maps/les9_gelderland_namen.png",
-    afbeeldingBlanco: "/maps/les9_gelderland_blanco.png",
+    afbeeldingNamen: "maps/les9_gelderland_namen.png",
+    afbeeldingBlanco: "maps/les9_gelderland_blanco.png",
     kleur: "#8BC34A",
     plaatsen: [
       { naam: "Nunspeet", x: 33.2, y: 24.4, type: "stad" },

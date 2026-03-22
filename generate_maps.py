@@ -501,8 +501,8 @@ def schrijf_provinces_js():
         lines.append("  {")
         lines.append(f"    id: {les['id']},")
         lines.append(f"    titel: \"{les['titel']}\",")
-        lines.append(f"    afbeeldingNamen: \"/maps/{base}_namen.png\",")
-        lines.append(f"    afbeeldingBlanco: \"/maps/{base}_blanco.png\",")
+        lines.append(f"    afbeeldingNamen: \"maps/{base}_namen.png\",")
+        lines.append(f"    afbeeldingBlanco: \"maps/{base}_blanco.png\",")
         lines.append(f"    kleur: \"{les['kleur']}\",")
         lines.append("    plaatsen: [")
 
