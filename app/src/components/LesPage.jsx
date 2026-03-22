@@ -4,6 +4,7 @@ import QuizPanel from './QuizPanel'
 import VoortgangBalk from './VoortgangBalk'
 import WeetjesPanel from './WeetjesPanel'
 import BewerkenTab from './BewerkenTab'
+import MentimeterQuiz from './MentimeterQuiz'
 import { useMobiel } from '../hooks/useMobiel'
 
 export default function LesPage({ les, onTerug }) {
@@ -24,8 +25,8 @@ export default function LesPage({ les, onTerug }) {
   }
 
   const TABS = mobiel
-    ? [['studeren','📖'],['oefenen','✏️'],['weetjes','💡'],['bewerken','🔧']]
-    : [['studeren','📖 Bestuderen'],['oefenen','✏️ Oefenen'],['weetjes','💡 Weetjes'],['bewerken','🔧 Bewerken']]
+    ? [['studeren','📖'],['oefenen','✏️'],['quiz','🎮'],['weetjes','💡'],['bewerken','🔧']]
+    : [['studeren','📖 Bestuderen'],['oefenen','✏️ Oefenen'],['quiz','🎮 Quiz'],['weetjes','💡 Weetjes'],['bewerken','🔧 Bewerken']]
 
   return (
     <div style={{ minHeight: '100vh', background: '#f0f2ff', fontFamily: 'Arial, sans-serif' }}>
@@ -74,6 +75,13 @@ export default function LesPage({ les, onTerug }) {
       {/* Content */}
       <div style={{ padding: mobiel ? 10 : 20, maxWidth: 1400, margin: '0 auto' }}>
 
+        {/* ── Quiz ── */}
+        {modus === 'quiz' && (
+          <div style={{ maxWidth: 680, margin: '0 auto' }}>
+            <MentimeterQuiz les={les} />
+          </div>
+        )}
+
         {/* ── Weetjes ── */}
         {modus === 'weetjes' && (
           <div style={{ maxWidth: 800, margin: '0 auto' }}>
@@ -87,7 +95,7 @@ export default function LesPage({ les, onTerug }) {
         )}
 
         {/* ── Studeren / Oefenen: kaart + eventueel quizpanel ── */}
-        {modus !== 'weetjes' && modus !== 'bewerken' && (
+        {modus !== 'weetjes' && modus !== 'bewerken' && modus !== 'quiz' && (
           <>
             {modus === 'oefenen' && (
               <VoortgangBalk les={les} goed={goedBeantwoord.size} totaal={steden.length} />
