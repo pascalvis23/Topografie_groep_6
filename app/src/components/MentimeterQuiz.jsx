@@ -5,6 +5,18 @@ import { useMobiel } from '../hooks/useMobiel'
 const TIMER_SEC = 15
 const MAX_VRAGEN = 10
 
+const HOOFDSTEDEN = {
+  'Overijssel':           'Zwolle',
+  'Zeeland':              'Middelburg',
+  'Groningen en Drenthe': null,          // twee provincies, geen enkelvoudige hoofdstad
+  'Flevoland en Utrecht': 'Utrecht',
+  'Noord-Brabant en Limburg': null,
+  'Zuid-Holland':         'Den Haag',
+  'Noord-Holland':        'Haarlem',
+  'Fryslân':              'Leeuwarden',
+  'Gelderland':           'Arnhem',
+}
+
 const OPTIE_STIJL = [
   { bg: '#E53935', hover: '#B71C1C', letter: 'A', icon: '🔴' },
   { bg: '#1E88E5', hover: '#0D47A1', letter: 'B', icon: '🔵' },
@@ -45,16 +57,15 @@ function genereerVragen(les) {
     })
   })
 
-  // Type 3: hoofdstad van de provincie
-  if (steden.length > 0) {
-    const hoofdstad = steden[0]
+  // Type 3: hoofdstad van de provincie (alleen als we het zeker weten)
+  const hoofdstad = HOOFDSTEDEN[les.titel]
+  if (hoofdstad && steden.some(s => s.naam === hoofdstad)) {
     const fouten = shuffle(alleAndereSteden).slice(0, 3).map(s => s.naam)
     vragen.push({
       type: 'keuze',
       vraag: `Wat is de hoofdstad van ${les.titel}?`,
-      juist: hoofdstad.naam,
-      opties: shuffle([hoofdstad.naam, ...fouten]),
-      hint: `(de eerste stad in de lijst)`,
+      juist: hoofdstad,
+      opties: shuffle([hoofdstad, ...fouten]),
     })
   }
 
